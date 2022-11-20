@@ -7,16 +7,19 @@ let state = {
     round: false
     }
 
-let start = document.querySelector(".start");
+const start = document.querySelector(".start");
 start.addEventListener("click", ()=> {
     start.style.display = 'none';
     state.round = true;
     });
 
 let end = document.querySelector(".end");
-end.addEventListener("click", ()=> {
+end.addEventListener("click", ()=>endGame());
+
+function endGame(){
     start.style.display = 'block';
-    });
+    return render;
+}
 
 const tds = document.querySelectorAll("td");
 tds.forEach(element => 
@@ -32,6 +35,7 @@ function render(){
                    ["","",""],
                    ["","",""]];
     state.round = false;
+    return state
 }
 
 function displayBoard(e){
@@ -48,7 +52,8 @@ function displayBoard(e){
         col = e.getAttribute("attr-col");
         row = e.getAttribute("attr-row");
         state.board[Number(row)][Number(col)] = 'o'
-        return e.innerHTML = 'O';
+        e.innerHTML = 'O';
+        return check();
     }
 }
 
